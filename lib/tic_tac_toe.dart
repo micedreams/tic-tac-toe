@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'raised_button.dart';
 
 class TicTacToe extends StatefulWidget {
   static const routeName = '/TicTacToe';
@@ -110,45 +111,35 @@ class _TicTacToeState extends State<TicTacToe> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  raisedButton(context, "a", a),
-                  raisedButton(context, "b", b),
-                  raisedButton(context, "c", c),
+                  raisedButton(context, this, "a", a),
+                  raisedButton(context, this, "b", b),
+                  raisedButton(context, this, "c", c),
                 ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  raisedButton(context, "d", d),
-                  raisedButton(context, "e", e),
-                  raisedButton(context, "f", f),
+                  raisedButton(context, this, "d", d),
+                  raisedButton(context, this, "e", e),
+                  raisedButton(context, this, "f", f),
                 ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  raisedButton(context, "g", g),
-                  raisedButton(context, "h", h),
-                  raisedButton(context, "i", i),
+                  raisedButton(context, this, "g", g),
+                  raisedButton(context, this, "h", h),
+                  raisedButton(context, this, "i", i),
                 ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  raisedButton(context, "result", result),
+                  raisedButton(context, this, "result", result),
                 ],
               ),
             ],
           ),
         ));
-  }
-
-  RaisedButton raisedButton(BuildContext contex, slot, value) {
-    return RaisedButton(
-      onPressed: () {
-        click(slot);
-        checkresult();
-      },
-      child: Text(value, style: Theme.of(context).textTheme.headline4),
-    );
   }
 }
