@@ -5,4 +5,5 @@ A Simple Flutter application which shows 3 * 3 grid where "X"s and "O"s can be i
 
 ## Getting Started
  $ flutter pub get
+ 
  $ flutter run
