@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'raised_button.dart';
 
 class TicTacToe extends StatefulWidget {
   static const routeName = '/TicTacToe';
@@ -111,35 +110,51 @@ class _TicTacToeState extends State<TicTacToe> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  raisedButton(context, this, "a", a),
-                  raisedButton(context, this, "b", b),
-                  raisedButton(context, this, "c", c),
+                  box(context, this, "a", a),
+                  box(context, this, "b", b),
+                  box(context, this, "c", c),
                 ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  raisedButton(context, this, "d", d),
-                  raisedButton(context, this, "e", e),
-                  raisedButton(context, this, "f", f),
+                  box(context, this, "d", d),
+                  box(context, this, "e", e),
+                  box(context, this, "f", f),
                 ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  raisedButton(context, this, "g", g),
-                  raisedButton(context, this, "h", h),
-                  raisedButton(context, this, "i", i),
+                  box(context, this, "g", g),
+                  box(context, this, "h", h),
+                  box(context, this, "i", i),
                 ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  raisedButton(context, this, "result", result),
+                  box(context, this, "result", result)
                 ],
               ),
             ],
           ),
         ));
   }
+}
+
+Card box(BuildContext context,formState, slot, value) {
+  return Card(
+    color: Colors.blue.shade200,
+    child: RaisedButton(
+      color: Colors.blue.shade200,
+      onPressed: () {
+        formState.click(slot);
+        formState.checkresult();
+      },
+      child: Center(
+        child: Text(value, style: Theme.of(context).textTheme.headline4),
+      ),
+    )
+  );
 }
