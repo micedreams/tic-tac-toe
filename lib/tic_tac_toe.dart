@@ -26,7 +26,7 @@ class _TicTacToeState extends State<TicTacToe> {
   String i = "";
 
   _box() {
-    String _initialValue;
+    late String _initialValue;
     setState(() {
       _initialValue = value;
     });
@@ -105,6 +105,7 @@ class _TicTacToeState extends State<TicTacToe> {
         ),
         body: Center(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
@@ -143,18 +144,17 @@ class _TicTacToeState extends State<TicTacToe> {
   }
 }
 
-Card box(BuildContext context,formState, slot, value) {
-  return Card(
-    color: Colors.blue.shade200,
-    child: RaisedButton(
-      color: Colors.blue.shade200,
+ box(BuildContext context,formState, slot, value) {
+  return Padding(
+    padding: const EdgeInsets.all(2.0),
+    child: ElevatedButton(
       onPressed: () {
         formState.click(slot);
         formState.checkresult();
       },
       child: Center(
-        child: Text(value, style: Theme.of(context).textTheme.headline4),
+        child: Text(value),
       ),
-    )
+    ),
   );
 }
