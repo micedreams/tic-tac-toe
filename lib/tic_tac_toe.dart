@@ -8,7 +8,6 @@ class TicTacToe extends StatefulWidget {
 class _TicTacToeState extends State<TicTacToe> {
   String reset = "reset";
   var str = List.filled(9, "", growable: false);
-  int clickCount = 0;
   String value = "";
 
   _box() {
@@ -24,29 +23,27 @@ class _TicTacToeState extends State<TicTacToe> {
     return value;
   }
 
-  checkresult() {
-    if ((clickCount > 4)) {
-      if ((str[0] == str[1] && str[0] == str[2] && str[0] != "") ||
-          (str[0] == str[3] && str[0] == str[6] && str[0] != "") ||
-          (str[0] == str[4] && str[0] == str[8] && str[0] != "")) {
-        reset = str[0];
-      } else if ((str[4] == str[3] && str[4] == str[5] && str[4] != "") ||
-          (str[4] == str[1] && str[4] == str[7] && str[4] != "") ||
-          (str[4] == str[2] && str[4] == str[6] && str[4] != "")) {
-        reset = str[4];
-      } else if ((str[8] == str[6] && str[8] == str[7] && str[8] != "") ||
-          (str[8] == str[2] && str[8] == str[5] && str[8] != "")) {
-        reset = str[8];
-      } else if (!str.contains("")) {
-        reset = "Draw";
-      }
+  _checkresult() {
+    if ((str[0] == str[1] && str[0] == str[2] && str[0] != "") ||
+        (str[0] == str[3] && str[0] == str[6] && str[0] != "") ||
+        (str[0] == str[4] && str[0] == str[8] && str[0] != "")) {
+      reset = str[0];
+    } else if ((str[4] == str[3] && str[4] == str[5] && str[4] != "") ||
+        (str[4] == str[1] && str[4] == str[7] && str[4] != "") ||
+        (str[4] == str[2] && str[4] == str[6] && str[4] != "")) {
+      reset = str[4];
+    } else if ((str[8] == str[6] && str[8] == str[7] && str[8] != "") ||
+        (str[8] == str[2] && str[8] == str[5] && str[8] != "")) {
+      reset = str[8];
+    } else if (!str.contains("")) {
+      reset = "Draw";
     }
   }
 
   click(index) {
-    if (str[index] == "") {
-      clickCount++;
+    if (str[index] == "" && reset == "reset") {
       str[index] = _box();
+      if (str.where((e) => e != "").length > 4) _checkresult();
     }
   }
 
@@ -65,12 +62,7 @@ class _TicTacToeState extends State<TicTacToe> {
               return GridTile(
                 child: Card(
                     child: ElevatedButton(
-                  onPressed: () {
-                    if (reset == "reset") {
-                      click(index);
-                      checkresult();
-                    }
-                  },
+                  onPressed: () => click(index),
                   child: Text(str[index]),
                 )),
               );

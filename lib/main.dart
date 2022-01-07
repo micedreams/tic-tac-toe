@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'tic_tac_toe.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(VanillaFlutter());
 }
 
-class MyApp extends StatelessWidget {
+class VanillaFlutter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
