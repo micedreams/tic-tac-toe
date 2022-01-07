@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'tic_tac_toe.dart';
 
 void main() {
-   runApp(MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: TicTacToe(),
       routes: {
-        TicTacToe.routeName: (ctx) => TicTacToe(),
+        "/TicTacToe": (ctx) => TicTacToe(),
       },
     );
   }

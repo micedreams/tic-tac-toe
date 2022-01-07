@@ -1,29 +1,15 @@
 import 'package:flutter/material.dart';
 
 class TicTacToe extends StatefulWidget {
-  static const routeName = '/TicTacToe';
-
   @override
-  State<StatefulWidget> createState() => new _TicTacToeState();
+  State<StatefulWidget> createState() => _TicTacToeState();
 }
 
 class _TicTacToeState extends State<TicTacToe> {
+  String reset = "reset";
+  var str = List.filled(9, "", growable: false);
   int clickCount = 0;
-  int xCount = 0;
-  int oCount = 0;
   String value = "";
-  String result = "";
-  
-
-  String a = "";
-  String b = "";
-  String c = "";
-  String d = "";
-  String e = "";
-  String f = "";
-  String g = "";
-  String h = "";
-  String i = "";
 
   _box() {
     late String _initialValue;
@@ -31,10 +17,8 @@ class _TicTacToeState extends State<TicTacToe> {
       _initialValue = value;
     });
     if (_initialValue == "X") {
-      oCount++;
       value = "O";
     } else {
-      xCount++;
       value = "X";
     }
     return value;
@@ -42,119 +26,65 @@ class _TicTacToeState extends State<TicTacToe> {
 
   checkresult() {
     if ((clickCount > 4)) {
-      if ((a == b && a == c) || (a == d && a == g) || (a == e && a == i)) {
-        result = a;
-      } else if ((e == d && e == f) || (e == b && e == h) || (e == c && e == g)) {
-        result = e;
-      } else if ((i == g && i == h) || (i == c && i == f)) {
-        result = i;
-      } else if ((xCount > 4) || (oCount > 4)){
-        result = "draw";
+      if ((str[0] == str[1] && str[0] == str[2] && str[0] != "") ||
+          (str[0] == str[3] && str[0] == str[6] && str[0] != "") ||
+          (str[0] == str[4] && str[0] == str[8] && str[0] != "")) {
+        reset = str[0];
+      } else if ((str[4] == str[3] && str[4] == str[5] && str[4] != "") ||
+          (str[4] == str[1] && str[4] == str[7] && str[4] != "") ||
+          (str[4] == str[2] && str[4] == str[6] && str[4] != "")) {
+        reset = str[4];
+      } else if ((str[8] == str[6] && str[8] == str[7] && str[8] != "") ||
+          (str[8] == str[2] && str[8] == str[5] && str[8] != "")) {
+      } else if (!str.contains("")) {
+        reset = "Draw";
       }
     }
   }
 
-  click(String slot) {
-    if (slot == "a" && a == "") {
+  click(index) {
+    if (str[index] == "") {
       clickCount++;
-      a = _box();
-    }
-    if (slot == "b" && b == "") {
-      clickCount++;
-      b = _box();
-    }
-    if (slot == "c" && c == "") {
-      clickCount++;
-      c = _box();
-    }
-    if (slot == "d" && d == "") {
-      clickCount++;
-      d = _box();
-    }
-    if (slot == "e" && e == "") {
-      clickCount++;
-      e = _box();
-    }
-    if (slot == "f" && f == "") {
-      clickCount++;
-      f = _box();
-    }
-    if (slot == "g" && g == "") {
-      clickCount++;
-      g = _box();
-    }
-    if (slot == "h" && h == "") {
-      clickCount++;
-      h = _box();
-    }
-    if (slot == "i" && i == "") {
-      clickCount++;
-      i = _box();
-    }
-    if (slot == "result") {
-      Navigator.of(context).pop();
-      Navigator.of(context).pushNamed(TicTacToe.routeName);
+      str[index] = _box();
     }
   }
 
   @override
   Widget build(context) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("TicTacToe"),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  box(context, this, "a", a),
-                  box(context, this, "b", b),
-                  box(context, this, "c", c),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  box(context, this, "d", d),
-                  box(context, this, "e", e),
-                  box(context, this, "f", f),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  box(context, this, "g", g),
-                  box(context, this, "h", h),
-                  box(context, this, "i", i),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  box(context, this, "result", result)
-                ],
-              ),
-            ],
-          ),
-        ));
-  }
-}
-
- box(BuildContext context,formState, slot, value) {
-  return Padding(
-    padding: const EdgeInsets.all(2.0),
-    child: ElevatedButton(
-      onPressed: () {
-        formState.click(slot);
-        formState.checkresult();
-      },
-      child: Center(
-        child: Text(value),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("TicTacToe"),
       ),
-    ),
-  );
+      body: Column(
+        children: [
+          GridView.count(
+            shrinkWrap: true,
+            crossAxisCount: 3,
+            children: List.generate(9, (index) {
+              return GridTile(
+                child: Card(
+                    child: ElevatedButton(
+                  onPressed: () {
+                    if (reset == "reset") {
+                      click(index);
+                      checkresult();
+                    }
+                  },
+                  child: Text(str[index]),
+                )),
+              );
+            }),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed("/TicTacToe");
+            },
+            child: Text(
+                reset == "reset" || reset == "Draw" ? reset : "$reset Wins"),
+          )
+        ],
+      ),
+    );
+  }
 }
