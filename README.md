@@ -1,9 +1,7 @@
 # tic_tac_toe
 
 A Simple Flutter application which shows 3 * 3 grid where "X"s and "O"s can be input and shows result in the end
-![simulator_screenshot_FAC23AA8-29CF-4858-B081-FE1D63176E01](https://user-images.githubusercontent.com/8918999/100366379-c65ff500-3026-11eb-97f3-ab84abf327d9.png)
+ $ flutter pub get![Screenshot 2022-01-07 at 05 44 01](https://user-images.githubusercontent.com/8918999/148470374-ab946a4b-6850-4031-8613-8afee5fa5a83.png)
 
-## Getting Started
- $ flutter pub get
  
  $ flutter run
