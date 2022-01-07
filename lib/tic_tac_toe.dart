@@ -36,6 +36,7 @@ class _TicTacToeState extends State<TicTacToe> {
         reset = str[4];
       } else if ((str[8] == str[6] && str[8] == str[7] && str[8] != "") ||
           (str[8] == str[2] && str[8] == str[5] && str[8] != "")) {
+        reset = str[8];
       } else if (!str.contains("")) {
         reset = "Draw";
       }
