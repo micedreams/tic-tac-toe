@@ -30,9 +30,6 @@ class Vanilla extends StatelessWidget {
       title: "TicTacToe",
       debugShowCheckedModeBanner: false,
       home: TicTacToe(),
-      routes: {
-        "/TicTacToe": (ctx) => TicTacToe(),
-      },
     );
   }
 }
