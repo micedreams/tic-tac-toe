@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tic_tac_toe/tic_tac_toe_bloc.dart';
-import 'package:tic_tac_toe/tic_tac_toe_event.dart';
-import 'package:tic_tac_toe/tic_tac_toe_state.dart';
+import 'package:tic_tac_toe/BLoCPattern/tic_tac_toe_bloc.dart';
+import 'package:tic_tac_toe/BLoCPattern/tic_tac_toe_event.dart';
+import 'package:tic_tac_toe/BLoCPattern/tic_tac_toe_state.dart';
 
 class TicTacToeView extends StatefulWidget {
   @override
