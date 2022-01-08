@@ -14,7 +14,6 @@ class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
       emit(TicTacToeState(str: dispose[0], result: dispose[1]));
     });
     on<ClickEvent>((event, emit) {
-      print(str);
       var click = function.click(event.index, str);
       emit(TicTacToeState(str: click[0], result: click[1]));
     });
