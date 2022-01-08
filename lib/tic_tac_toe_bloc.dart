@@ -1,13 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-class TicTacToeCubit extends Cubit<List<String>> {
-  TicTacToeCubit() : super([]);
-  var str = List.filled(9, "", growable: false);
-
-  void getList() async {
-    emit(str);
-  }
-}
+import 'package:tic_tac_toe/tic_tac_toe_event.dart';
+import 'package:tic_tac_toe/tic_tac_toe_state.dart';
 
 class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
   String reset = "reset";
@@ -59,17 +52,4 @@ class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
   }
 }
 
-abstract class TicTacToeEvent {}
 
-class ResetEvent extends TicTacToeEvent {}
-
-class ClickEvent extends TicTacToeEvent {
-  final int index;
-  ClickEvent(this.index);
-}
-
-class TicTacToeState {
-  final str;
-  final result;
-  TicTacToeState({this.str, this.result = "reset"});
-}
