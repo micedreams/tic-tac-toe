@@ -14,13 +14,10 @@ class BLoCPatternFlutter extends StatelessWidget {
     return MaterialApp(
       title: "TicTacToe",
       debugShowCheckedModeBanner: false,
-      home: BlocProvider<TicTacToeCubit>(
-        create: (context) => TicTacToeCubit()..getList(),
+      home: BlocProvider<TicTacToeBloc>(
+        create: (context) => TicTacToeBloc()..add(ResetEvent()),
         child: TicTacToeView(),
       ),
-      routes: {
-        "/TicTacToeView": (ctx) => TicTacToeView(),
-      },
     );
   }
 }

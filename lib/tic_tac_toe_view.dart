@@ -14,8 +14,8 @@ class _TicTacToeViewState extends State<TicTacToeView> {
         appBar: AppBar(
           title: Text("TicTacToe"),
         ),
-        body: BlocBuilder<TicTacToeCubit, List<String>>(
-          builder: (context, strings) {
+        body: BlocBuilder<TicTacToeBloc, TicTacToeState>(
+          builder: (context, state) {
             return Column(
               children: [
                 GridView.count(
@@ -25,18 +25,21 @@ class _TicTacToeViewState extends State<TicTacToeView> {
                     return GridTile(
                       child: Card(
                           child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(strings[index]),
+                        onPressed: () {
+                          return BlocProvider.of<TicTacToeBloc>(context)
+                              .add(ClickEvent(index));
+                        },
+                        child: Text(state.str[index]),
                       )),
                     );
                   }),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pushNamed("/TicTacToeView");
+                    return BlocProvider.of<TicTacToeBloc>(context)
+                        .add(ResetEvent());
                   },
-                  child: Text("reset"),
+                  child: Text(state.result),
                 )
               ],
             );
