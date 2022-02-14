@@ -14,7 +14,7 @@ BLoC = business logic component.
 
 BLoC pattern is better than the setState State management system because it sepates out view and business logic.
 
-(if you want the app to use vanilla Flutter just change `runApp(BLoCPatternFlutter());` to `runApp(Vanilla());` in the `main.dart` file 😉😉)
+(if you want the app to use setState Flutter just change `runApp(BLoCPatternFlutter());` to `runApp(Vanilla());` in the `main.dart` file 😉😉)
 
  https://user-images.githubusercontent.com/8918999/148472228-bd72a1eb-5d40-4f92-b199-872f60c7c81d.mov
 
