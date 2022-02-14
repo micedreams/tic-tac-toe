@@ -16,7 +16,7 @@ This App uses the flutter BLoC pattern.
 
 ## How I turned my Set state flutter project into BLoC pattern flutter project
 
-1. First I figured out states of my flutter widgits (in this case I just have 1 state..) then I defined the state class 
+1. First we need to figure out states of our flutter widgits (in this case we just have 1 state..) then we define the state class 
 
  ```
  class TicTacToeState {
@@ -29,9 +29,9 @@ This App uses the flutter BLoC pattern.
  then define separate classes for each state and  extend those states to the abstact class so if there is a common methods 
  you can define it in the abstract class..and later override it in the classes that extend it..same thing happens with events. 
  
-2. I figured out events that cuase changes in my board.
+2. Next we need to figure outthe events that cuase changes in our board.
 
-   My projects has 2 types of events 
+   Our projects has 2 types of events 
     1. reset event: event that can be seen as soon as the app opens or when clicked on reset button to bring it back to the initial state
     2. click event: event that triggers the start of the game... or the next move....
   
@@ -45,7 +45,7 @@ class ClickEvent extends TicTacToeEvent {
   ClickEvent(this.index);
 }
 ```
-3. I imported the [flutter_bloc](https://pub.dev/packages/flutter_bloc) library into my project 
+3. After that we need to import the [flutter_bloc](https://pub.dev/packages/flutter_bloc) library into the project 
 4. Defining BLoC Class 
    
    Our BLoC class looks something like this 
@@ -75,7 +75,7 @@ class ClickEvent extends TicTacToeEvent {
  
   In our case `ResetEvent` calls the dispose function and sets everything to initial value and `Click event` simply calls the click function
  
-5. Its time to tie things together,
+5. Finally tieing things together,
  
  
   i.  In main.dart file, wrap the viewClass widget with `BlocProvider` widget, give its create property the value of initial event 
