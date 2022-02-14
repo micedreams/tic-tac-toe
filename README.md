@@ -25,7 +25,7 @@ This App uses the flutter BLoC pattern.
   TicTacToeState({this.str, this.result = "reset"});
 }
 ```
- `Abstract Factory Pattern`:if there is more than one state it is good to first define an abstract class 
+ `Abstract Factory Pattern`: If there is more than one state it is good to first define an abstract class 
  then define separate classes for each state and  extend those states to the abstact class so if there is a common methods 
  you can define it in the abstract class..and later override it in the classes that extend it..same thing happens with events. 
  
@@ -74,8 +74,36 @@ class ClickEvent extends TicTacToeEvent {
   when `on<event>` is triggered by the BlocProvider it emits a state.
  
   In our case `ResetEvent` calls the dispose function and sets everything to initial value and `Click event` simply calls the click function
+ 
+5. Its time to tie things together,
+ 
+ 
+  i.  In main.dart file, wrap the viewClass widget with `BlocProvider` widget, give its create property the value of initial event 
+    
+ in our case the ResetEvent
+ ```
+ home: BlocProvider<TicTacToeBloc>(
+        create: (context) => TicTacToeBloc()..add(ResetEvent()),
+        child: TicTacToeView(),
+      ),
+ ```
+ 
+ ii. In ViewClass, inside the build method wrap the widget that is being returned with a `BlocBuilder` 
+ 
+ iii. replace setState functions with  ```BlocProvider.of<TicTacToeBloc>(context).add(eventCall)```
+ 
+ 
+in our case
+ 
+ The ResetEvent gets triggered by 
+ ```
+ BlocProvider.of<TicTacToeBloc>(context).add(ResetEvent());
+ ```
+ 
+ The ClickEvent gets triggered by 
+ ```
+ BlocProvider.of<TicTacToeBloc>(context).add(ClickEvent(index));
+ ```
+ 
+ and We are Done!!
 
-7. defined event methods that emits the required state `on<EventClass>((event, emit) {emit();});`
-8. to set this all up in main method used the BlocProvider widget giving it the inital state event for its create property 
-9. and in View Class in the on pressed button, where set state was being called I replaced it with the BlocProvider's add(event) function 
-10. and tada things started to work
