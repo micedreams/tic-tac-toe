@@ -29,7 +29,7 @@ This App uses the flutter BLoC pattern.
  then define separate classes for each state and  extend those states to the abstact class so if there is a common methods 
  you can define it in the abstract class..and later override it in the classes that extend it..same thing happens with events. 
  
-2. Next we need to figure outthe events that cuase changes in our board.
+2. Next we need to figure out the events that cuase changes in our board.
 
    Our projects has 2 types of events 
     1. reset event: event that can be seen as soon as the app opens or when clicked on reset button to bring it back to the initial state
