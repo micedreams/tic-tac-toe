@@ -69,8 +69,11 @@ class ClickEvent extends TicTacToeEvent {
  
   It has a constructor that takes in an initial value and on<event> functions 
  
-  (note: in `on<event>`, event is a string used by the BlocProvider to trigger the specific event defined in the method)
-  
+  (note: in `on<event>` event is a string used by the BlocProvider to trigger the specific event defined in the method)
+ 
+  when `on<event>` is triggered by the BlocProvider it emits a state.
+ 
+  In our case `ResetEvent` calls the dispose function and sets everything to initial value and `Click event` simply calls the click function
 
 7. defined event methods that emits the required state `on<EventClass>((event, emit) {emit();});`
 8. to set this all up in main method used the BlocProvider widget giving it the inital state event for its create property 
