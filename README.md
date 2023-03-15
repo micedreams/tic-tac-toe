@@ -22,7 +22,7 @@ BLoC pattern is better than the setState State management system because it sepa
 
 1. First we need to figure out states of our flutter widgits (in this case we just have 1 state..) then we define the state class 
 
- ```
+ ``` dart
  class TicTacToeState {
   final str;
   final result;
@@ -40,7 +40,7 @@ BLoC pattern is better than the setState State management system because it sepa
        (Event that can be seen as soon as the app opens or when clicked on reset button to bring it back to the initial state.)
     2. Click event: Event that triggers the start of the game or the next move.
   
- ```
+ ``` dart
  abstract class TicTacToeEvent {}
  
 class ResetEvent extends TicTacToeEvent {}
@@ -54,7 +54,7 @@ class ClickEvent extends TicTacToeEvent {
 4. Defining BLoC Class 
    
    Our BLoC class looks something like this 
-   ```
+   ``` dart
    class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
       TicTacToeFunctions function = new TicTacToeFunctions();
       var str = List.filled(9, "", growable: false);
@@ -86,7 +86,7 @@ class ClickEvent extends TicTacToeEvent {
   i.  In main.dart file, wrap the viewClass widget with `BlocProvider` widget, give its create property the value of initial event 
     
  in our case the ResetEvent
- ```
+ ``` dart
  home: BlocProvider<TicTacToeBloc>(
         create: (context) => TicTacToeBloc()..add(ResetEvent()),
         child: TicTacToeView(),
@@ -101,12 +101,12 @@ class ClickEvent extends TicTacToeEvent {
 in our case
  
  The ResetEvent gets triggered by 
- ```
+ ``` dart
  BlocProvider.of<TicTacToeBloc>(context).add(ResetEvent());
  ```
  
  The ClickEvent gets triggered by 
- ```
+ ``` dart
  BlocProvider.of<TicTacToeBloc>(context).add(ClickEvent(index));
  ```
  
