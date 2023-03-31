@@ -1,4 +1,3 @@
-# tic_tac_toe
 
 A Simple Flutter application which shows 3 * 3 grid where "X"s and "O"s can be input and shows result in the end
 ```
