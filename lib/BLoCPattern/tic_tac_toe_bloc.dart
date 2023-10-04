@@ -23,7 +23,7 @@ class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
       var click = function.click(event.index, str);
       emit(Board(str: click[0], result: click[1]));
 
-      if (str.contains(''))
+      if (isSingle && str.contains(''))
         Future.delayed(
           const Duration(milliseconds: 500),
           () => add(AddEvent()),
