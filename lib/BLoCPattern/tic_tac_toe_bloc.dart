@@ -7,21 +7,21 @@ class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
   TicTacToeFunctions function = new TicTacToeFunctions();
   var str = List.filled(9, "", growable: false);
   var isSingle = false;
-  TicTacToeBloc() : super(ResetCard()) {
+  TicTacToeBloc() : super(ResetCardState()) {
     on<ResetEvent>((event, emit) {
       var dispose = function.dispose();
       str = dispose[0];
-      emit(ResetCard());
+      emit(ResetCardState());
     });
 
     on<PlayerEvent>((event, emit) {
       isSingle = event.isSingle;
-      emit(Board(str: str, result: "Reset"));
+      emit(BoardState(str: str, result: "Reset"));
     });
 
     on<ClickEvent>((event, emit) {
       var click = function.click(event.index, str);
-      emit(Board(str: click[0], result: click[1]));
+      emit(BoardState(str: click[0], result: click[1]));
 
       if (isSingle && str.contains(''))
         Future.delayed(
@@ -33,7 +33,7 @@ class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
     on<AddEvent>((event, emit) {
       final index = function.getRandomEmptyIndex(str);
       var click = function.click(index, str);
-      emit(Board(str: click[0], result: click[1]));
+      emit(BoardState(str: click[0], result: click[1]));
     });
   }
 }
