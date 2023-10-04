@@ -16,6 +16,18 @@ class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
     on<ClickEvent>((event, emit) {
       var click = function.click(event.index, str);
       emit(TicTacToeState(str: click[0], result: click[1]));
+
+      if (str.contains(''))
+        Future.delayed(
+          const Duration(milliseconds: 500),
+          () => add(AddEvent()),
+        );
+    });
+
+    on<AddEvent>((event, emit) {
+      final index = function.getRandomEmptyIndex(str);
+      var click = function.click(index, str);
+      emit(TicTacToeState(str: click[0], result: click[1]));
     });
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class TicTacToeFunctions {
   String reset = "reset";
   var str = List.filled(9, "", growable: false);
@@ -28,6 +30,21 @@ class TicTacToeFunctions {
     } else if (!str.contains("")) {
       reset = "Draw";
     }
+  }
+
+  getRandomEmptyIndex(array) {
+    final indice = [];
+
+    for (int i = 0; i < array.length; i++) {
+      if (array[i] == "") {
+        indice.add(i);
+      }
+    }
+
+    final random = Random();
+    int randomIndex = random.nextInt(indice.length);
+
+    return indice[randomIndex];
   }
 
   click(index, str) {

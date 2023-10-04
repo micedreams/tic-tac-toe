@@ -6,3 +6,7 @@ class ClickEvent extends TicTacToeEvent {
   final int index;
   ClickEvent(this.index);
 }
+
+class AddEvent extends TicTacToeEvent {
+  AddEvent();
+}
