@@ -10,3 +10,8 @@ class ClickEvent extends TicTacToeEvent {
 class AddEvent extends TicTacToeEvent {
   AddEvent();
 }
+
+class PlayerEvent extends TicTacToeEvent {
+  final bool isSingle;
+  PlayerEvent(this.isSingle);
+}

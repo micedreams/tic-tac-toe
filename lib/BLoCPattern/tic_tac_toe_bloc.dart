@@ -6,16 +6,22 @@ import 'package:tic_tac_toe/tic_tac_toe_functions.dart';
 class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
   TicTacToeFunctions function = new TicTacToeFunctions();
   var str = List.filled(9, "", growable: false);
-  TicTacToeBloc()
-      : super(TicTacToeState(str: List.filled(9, "", growable: false))) {
+  var isSingle = false;
+  TicTacToeBloc() : super(ResetCard()) {
     on<ResetEvent>((event, emit) {
       var dispose = function.dispose();
       str = dispose[0];
-      emit(TicTacToeState(str: dispose[0], result: dispose[1]));
+      emit(ResetCard());
     });
+
+    on<PlayerEvent>((event, emit) {
+      isSingle = event.isSingle;
+      emit(Board(str: str, result: "Reset"));
+    });
+
     on<ClickEvent>((event, emit) {
       var click = function.click(event.index, str);
-      emit(TicTacToeState(str: click[0], result: click[1]));
+      emit(Board(str: click[0], result: click[1]));
 
       if (str.contains(''))
         Future.delayed(
@@ -27,7 +33,7 @@ class TicTacToeBloc extends Bloc<TicTacToeEvent, TicTacToeState> {
     on<AddEvent>((event, emit) {
       final index = function.getRandomEmptyIndex(str);
       var click = function.click(index, str);
-      emit(TicTacToeState(str: click[0], result: click[1]));
+      emit(Board(str: click[0], result: click[1]));
     });
   }
 }

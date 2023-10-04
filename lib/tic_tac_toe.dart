@@ -4,12 +4,7 @@ import 'package:tic_tac_toe/BLoCPattern/tic_tac_toe_bloc.dart';
 import 'package:tic_tac_toe/BLoCPattern/tic_tac_toe_event.dart';
 import 'package:tic_tac_toe/BLoCPattern/tic_tac_toe_state.dart';
 
-class TicTacToe extends StatefulWidget {
-  @override
-  State createState() => _TicTacToeViewState();
-}
-
-class _TicTacToeViewState extends State<TicTacToe> {
+class TicTacToe extends StatelessWidget {
   @override
   Widget build(context) => Scaffold(
       appBar: AppBar(
@@ -19,28 +14,47 @@ class _TicTacToeViewState extends State<TicTacToe> {
         builder: (context, state) {
           final blocContext = BlocProvider.of<TicTacToeBloc>(context);
 
-          return Column(
-            children: [
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                children: List.generate(
-                  9,
-                  (index) => GridTile(
-                    child: Card(
-                      child: ElevatedButton(
-                        onPressed: () => blocContext.add(ClickEvent(index)),
-                        child: Text(state.str[index]),
+          if (state is Board)
+            return Column(
+              children: [
+                GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 3,
+                  children: List.generate(
+                    9,
+                    (index) => GridTile(
+                      child: Card(
+                        child: ElevatedButton(
+                          onPressed: () => blocContext.add(ClickEvent(index)),
+                          child: Text(state.str[index]),
+                        ),
                       ),
                     ),
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: () => blocContext.add(ResetEvent()),
+                  child: Text(state.result),
+                ),
+              ],
+            );
+
+          return Center(
+            child: Card(
+              child: ButtonBar(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => blocContext.add(PlayerEvent(true)),
+                    child: Text('Single player'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => blocContext.add(PlayerEvent(false)),
+                    child: Text('Multi player'),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () => blocContext.add(ResetEvent()),
-                child: Text(state.result),
-              ),
-            ],
+            ),
           );
         },
       ));

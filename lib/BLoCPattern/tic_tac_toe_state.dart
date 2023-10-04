@@ -1,5 +1,9 @@
-class TicTacToeState {
+class TicTacToeState {}
+
+class Board extends TicTacToeState {
   final str;
   final result;
-  TicTacToeState({this.str, this.result = "reset"});
+  Board({this.str, this.result = "reset"});
 }
+
+class ResetCard extends TicTacToeState {}
